@@ -9,7 +9,7 @@ In **Spiking Neural Networks**, information is **temporal** (movies).
 
 ---
 
-## 1️. The Paradigm Shift: ANN vs. SNN
+## 1. The Paradigm Shift: ANN vs. SNN
 
 To understand SNNs, we must unlearn how we view “numbers” in neural networks.
 
@@ -34,14 +34,14 @@ Information is encoded in:
 
 ---
 
-## 2️. The Atomic Unit: The Spike
+## 2. The Atomic Unit: The Spike
 
 A spike is mathematically modeled as a **Dirac delta function** \( \delta(t) \),  
 but in digital systems it is simply a **binary event**.
 
 - **Amplitude:** irrelevant (all spikes look the same)
 - **Duration:** instantaneous (ideal model)
-- **Meaning:** *an event has occurred*
+- **Meaning:** an event has occurred
 
 A sequence of spikes over time is called a **spike train**:
 
@@ -53,14 +53,14 @@ where \( t_i \) are the exact moments when the neuron fired.
 
 ---
 
-## 3️. The Neuron Model: Leaky Integrate-and-Fire (LIF)
+## 3. The Neuron Model: Leaky Integrate-and-Fire (LIF)
 
 The industry-standard neuron model for SNNs is the **Leaky Integrate-and-Fire (LIF)** neuron.
 
-### 🪣 Intuition: The Leaky Bucket Model
+### Intuition: The Leaky Bucket Model
 
-- **Integrate (Fill):** incoming spikes add “water” (voltage)
-- **Leak (Decay):** the bucket slowly drains over time
+- **Integrate (Fill):** incoming spikes add voltage
+- **Leak (Decay):** voltage slowly decays over time
 - **Fire (Threshold):** if voltage reaches \( V_{th} \), the neuron spikes
 - **Reset:** voltage returns to zero
 
@@ -71,12 +71,12 @@ The industry-standard neuron model for SNNs is the **Leaky Integrate-and-Fire (L
 The leak mechanism enables **temporal computation**.
 
 **Case A — Spikes close in time**
-- Bucket doesn’t leak much
+- Little leakage
 - Voltage accumulates
 - Threshold crossed → **FIRE**
 
 **Case B — Spikes far apart**
-- Bucket leaks between spikes
+- Significant leakage
 - Voltage never builds up
 - Threshold not crossed → **SILENCE**
 
@@ -86,7 +86,7 @@ The leak mechanism enables **temporal computation**.
 
 ---
 
-## 4️. The Physics: Continuous-Time Model
+## 4. The Physics: Continuous-Time Model
 
 The membrane potential \( V(t) \) follows:
 
@@ -94,7 +94,7 @@ The membrane potential \( V(t) \) follows:
 \tau \frac{dV(t)}{dt} = -(V(t) - V_{rest}) + R \cdot I(t)
 \]
 
-Assuming \( V_{rest}=0 \) and \( R=1 \):
+Assuming \( V_{rest} = 0 \) and \( R = 1 \):
 
 \[
 \tau \frac{dV(t)}{dt} = -V(t) + \sum_i w_i s_i(t)
@@ -103,7 +103,7 @@ Assuming \( V_{rest}=0 \) and \( R=1 \):
 Where:
 - \( \tau \) — time constant (memory duration)
 - \( -V(t) \) — leak (forgetting)
-- \( \sum_i w_i s_i(t) \) — integration of spikes
+- \( \sum_i w_i s_i(t) \) — spike integration
 
 ---
 
@@ -121,56 +121,53 @@ Each spike leaves an **exponentially decaying trace**.
 
 ---
 
-## 5️. From Physics to Code: Discrete-Time Model
+## 5. From Physics to Code: Discrete-Time Model
 
 Digital systems operate in time steps \( \Delta t \).  
 Using **Euler discretization**:
 
 \[
 V[t+1] =
-\underbrace{\beta V[t]}_{\text{Decay (Past)}} +
-\underbrace{\sum w \cdot x[t]}_{\text{Input (Present)}} -
-\underbrace{S_{out}[t] \cdot V_{th}}_{\text{Reset (Control)}}
+\beta V[t] +
+\sum w \cdot x[t] -
+S_{out}[t] \cdot V_{th}
 \]
 
 Where:
 
 \[
-\beta = e^{-\frac{\Delta t}{\tau}} \approx 1 - \frac{\Delta t}{\tau}
-\quad (0.9 < \beta < 0.99)
+\beta = e^{-\frac{\Delta t}{\tau}} \approx 1 - \frac{\Delta t}{\tau},
+\quad 0.9 < \beta < 0.99
 \]
 
 ---
 
-### Interpreting the Equation (Very Important)
+### Interpreting the Equation
 
-- **\( \beta V[t] \) — The Past (Memory)**  
-  Retains historical context. Without this, the neuron has no memory.
+- **\( \beta V[t] \)** — Memory of the past  
+- **\( \sum w \cdot x[t] \)** — Present input  
+- **\( S_{out}[t] \cdot V_{th} \)** — Reset for stability  
 
-- **\( \sum w \cdot x[t] \) — The Present (Sensation)**  
-  Represents incoming information at the current moment.
-
-- **\( S_{out}[t] \cdot V_{th} \) — The Future (Stability / Control)**  
-  Forces reset after firing, preventing unbounded energy accumulation.
-
-> This balance enables **stable, temporal intelligence**.
+This balance enables **stable temporal intelligence**.
 
 ---
 
-### 🔧 Pseudocode (Conceptual)
+### Pseudocode (Conceptual)
 
 ```python
+mem = 0
+
 for t in range(time_steps):
-    # 1. Leak (Decay)
+    # 1. Leak (decay)
     mem = mem * beta
 
     # 2. Integrate input spikes
     mem = mem + input_spikes[t]
 
     # 3. Threshold check
-    if mem > threshold:
+    if mem >= threshold:
         spike = 1
-        mem = 0  # Reset
+        mem = 0  # reset
     else:
         spike = 0
 
@@ -178,3 +175,4 @@ for t in range(time_steps):
     spike_train_out.append(spike)
 
 **Spiking Neural Networks compute by integrating recent events over time and firing when enough spikes align temporally.**
+
