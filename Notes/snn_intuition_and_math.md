@@ -1,4 +1,4 @@
-# 🧠 Spiking Neural Networks (SNNs): Intuition & Mathematics
+# Spiking Neural Networks (SNNs): Intuition & Mathematics
 
 ## The Core Philosophy
 
@@ -9,7 +9,7 @@ In **Spiking Neural Networks**, information is **temporal** (movies).
 
 ---
 
-## 1️⃣ The Paradigm Shift: ANN vs. SNN
+## 1️. The Paradigm Shift: ANN vs. SNN
 
 To understand SNNs, we must unlearn how we view “numbers” in neural networks.
 
@@ -20,7 +20,7 @@ To understand SNNs, we must unlearn how we view “numbers” in neural networks
 | Dimension | Spatial (layers) | Spatio-temporal (layers + time) |
 | Analogy | A photograph | Morse code transmission |
 
-### 🔑 The Golden Rule
+### The Golden Rule
 
 In an SNN, a neuron does **not** shout *“0.9!”* or *“0.1!”*  
 Instead, it shouts:
@@ -34,7 +34,7 @@ Information is encoded in:
 
 ---
 
-## 2️⃣ The Atomic Unit: The Spike
+## 2️. The Atomic Unit: The Spike
 
 A spike is mathematically modeled as a **Dirac delta function** \( \delta(t) \),  
 but in digital systems it is simply a **binary event**.
@@ -53,7 +53,7 @@ where \( t_i \) are the exact moments when the neuron fired.
 
 ---
 
-## 3️⃣ The Neuron Model: Leaky Integrate-and-Fire (LIF)
+## 3️. The Neuron Model: Leaky Integrate-and-Fire (LIF)
 
 The industry-standard neuron model for SNNs is the **Leaky Integrate-and-Fire (LIF)** neuron.
 
@@ -66,7 +66,7 @@ The industry-standard neuron model for SNNs is the **Leaky Integrate-and-Fire (L
 
 ---
 
-### ⚡ Why Time Matters: Coincidence Detection
+### Why Time Matters: Coincidence Detection
 
 The leak mechanism enables **temporal computation**.
 
@@ -86,7 +86,7 @@ The leak mechanism enables **temporal computation**.
 
 ---
 
-## 4️⃣ The Physics: Continuous-Time Model
+## 4️. The Physics: Continuous-Time Model
 
 The membrane potential \( V(t) \) follows:
 
@@ -107,7 +107,7 @@ Where:
 
 ---
 
-### 📉 The Exponential Reality
+### The Exponential Reality
 
 Solving the equation gives:
 
@@ -121,7 +121,7 @@ Each spike leaves an **exponentially decaying trace**.
 
 ---
 
-## 5️⃣ From Physics to Code: Discrete-Time Model
+## 5️. From Physics to Code: Discrete-Time Model
 
 Digital systems operate in time steps \( \Delta t \).  
 Using **Euler discretization**:
@@ -142,7 +142,7 @@ Where:
 
 ---
 
-### 🧠 Interpreting the Equation (Very Important)
+### Interpreting the Equation (Very Important)
 
 - **\( \beta V[t] \) — The Past (Memory)**  
   Retains historical context. Without this, the neuron has no memory.
