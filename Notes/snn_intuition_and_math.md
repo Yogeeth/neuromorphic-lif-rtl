@@ -153,11 +153,12 @@ $$
 
 ### Interpretation
 
-- $$ \beta V[t] $$ — memory of the past  
-- $$ \sum_i w_i x_i[t] $$ — present input  
-- $$ S_{out}[t] \cdot V_{th} $$ — reset after firing  
+- $\beta V[t]$ — memory of the past  
+- $\sum_i w_i x_i[t]$ — present input  
+- $S_{out}[t] \cdot V_{th}$ — reset after firing  
 
 This balance enables **stable temporal computation**.
+
 
 ---
 
