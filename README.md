@@ -5,11 +5,10 @@
 ---
 
 ## Table of Contents
-1. [Project Overview](#-project-overview)
-2. [Repository Structure](#-repository-structure)
-3. [Architecture & Modules](#-architecture--modules)
-4. [Deep Dive: SNN Intuition & Math](#-deep-dive-snn-intuition--math)
-5. [Design Philosophy & Future Work](#-design-philosophy--future-work)
+1. Project Overview
+2. Repository Structure
+3. Architecture & Modules
+4. Design Philosophy
 
 ---
 
@@ -43,6 +42,7 @@ This work serves as a foundational building block for Embedded AI, Event-driven 
 │ └── tb_snn.sv # Simulation testbench and waveform generation
 │
 └── README.md # This documentation
+```
 
 ## Architecture & Modules
 
