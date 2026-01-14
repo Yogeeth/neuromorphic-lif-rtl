@@ -55,11 +55,11 @@ This work serves as a foundational building block for Embedded AI, Event-driven 
 
 ### RTL - 2
 [View Simulation on EDA Playground](https://www.edaplayground.com/x/J3Pa)
-### High-Level Data Flow
+#### High-Level Data Flow
 The hardware implements a single-neuron inference pipeline with explicit temporal dynamics.
 **Pipeline:** Input Value → Poisson Encoder → Synaptic Weight Memory → Temporal Accumulator → LIF Neuron → Output Spike
 
-### Module Descriptions
+#### Module Descriptions
 1. **lif_neuron.sv (The Brain)**  
    Implements the Leaky Integrate-and-Fire model using signed fixed-point arithmetic.  
    **Logic:** Uses arithmetic right shifts to simulate exponential decay (leak) without expensive multipliers.  
