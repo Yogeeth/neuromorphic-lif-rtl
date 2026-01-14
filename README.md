@@ -52,20 +52,21 @@ This work serves as a foundational building block for Embedded AI, Event-driven 
 
 ## Architecture & Modules
 ### RTL - 1
-📦 Verilog Module Descriptions
-1. snn_layer_top.sv (Layer Orchestrator)
+**Verilog Module Descriptions**
+
+1. **snn_layer_top.sv** (Layer Orchestrator)
 The top-level control module that manages the dense layer of 10 parallel LIF neurons.
 Function: Acts as the Layer Controller, instantiating 10 lif_neuron_top units and orchestrating the data flow.
 Key Logic:
 Active Pruning (Masking): dynamically monitors the spike history. If a neuron spikes (classifies), this module cuts off its enable signal for the remainder of the image, significantly saving power.
 Aggregate Handshake: Implements a global synchronization barrier. It waits for all active neurons to report data_valid before signaling step_done, ensuring lock-step processing across the layer.
 
-2. lif_neuron_top.sv (Neuron Wrapper)
+2. **lif_neuron_top.sv** (Neuron Wrapper)
 The self-contained Spiking Neuron Unit.
 Function: A structural wrapper that packages the three core sub-modules (controller, neuron, poisson_encoder) into a single interface.
 Role: abstracts the internal complexity of the neuron, exposing only the simple pixel interface, configuration bus, and handshake signals to the snn_layer_top.
 
-3. controller.sv (Local Finite State Machine)
+3. **controller.sv** (Local Finite State Machine)
 The dedicated FSM "Brain" embedded within each neuron unit.
 Function: Manages the fetch-decode-execute cycle for its specific neuron datapath.
 
@@ -74,12 +75,12 @@ Integrate: Drives the datapath to accumulate weights for standard inputs.
 Decay: Triggers a right-shift operation at the image boundary (Index 783).
 Fire & Reset: Executes a priority interrupt to discharge the potential immediately upon spiking.
 
-4. neuron.sv (Arithmetic Datapath)
+4. **neuron.sv** (Arithmetic Datapath)
 The "Muscle" of the unit, performing the actual register-transfer operations.
 Function: Executes arithmetic operations based on control signals.
 Architecture: Contains the accumulator, weight registers, and a specialized ALU Mux that switches between Integration Mode (Potential + Weight) and Decay Mode ((Potential >> 1) + Weight).
 
-5. poisson_encoder.sv (Spike Generator)
+5. **poisson_encoder.sv** (Spike Generator)
 Function: Converts the 8-bit input pixel intensity into a stochastic bit-stream (spike train) proportional to the pixel's brightness, enabling the SNN to process static image data.
 ### RTL - 2
 [View Simulation on EDA Playground](https://www.edaplayground.com/x/J3Pa)
