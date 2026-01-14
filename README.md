@@ -86,6 +86,5 @@ The hardware implements a single-neuron inference pipeline with explicit tempora
 - **Clarity:** Code is structured to be readable and educational.
 
 ## Current Limitations
-- **Single Neuron:** Currently implements one physical neuron.  
+- **Single Layer Architecture:** Implements a fully connected layer with **10 parallel LIF neurons**.
 - **Inference Only:** Weights must be pre-trained and loaded; no on-chip learning (STDP) yet.  
-- **Sequential Processing:** Synapses are processed one by one, trading speed for area efficiency.
