@@ -29,25 +29,43 @@ This work serves as a foundational building block for Embedded AI, Event-driven 
 ---
 
 ## Repository Structure
-
 ```text
 .
 ├── Notes/
 ├── rtl-1/
+│   ├── accumulator.v        # Accumulation register
+│   ├── adder.v              # Adder unit
+│   ├── alu.sv               # Arithmetic Logic Unit
+│   ├── alu_controller.sv    # ALU Control Logic
+│   ├── comparator.v         # Magnitude comparator
+│   ├── comparison_reg.v     # Comparison result storage
+│   ├── controller.v         # Main FSM Controller
+│   ├── decay_reg.v          # Decay factor register
+│   ├── mult_reg.v           # Multiplier output register
+│   ├── multifplier.v        # Integer Multiplier (Note: Typo in filename)
+│   ├── mux.v                # Multiplexer
+│   ├── network.sv           # Network interconnect
+│   ├── neural_network.sv    # Top-level Neural Network wrapper
+│   ├── neuron.v             # Basic neuron implementation
+│   ├── overview.md          # RTL-1 Documentation
+│   ├── poisson_encoder.sv   # Input spike generation
+│   ├── store.v              # Memory/Storage unit
+│   ├── threshold_reg.v      # Threshold parameter register
+│   └── weight_reg.v         # Synaptic weight register
 ├── rtl-2/
 │   ├── design/
-│   │   ├── lif_neuron.sv      # Leaky Integrate-and-Fire neuron (fixed-point)
-│   │   ├── snn_core.sv        # Top-level SNN core (FSM + Encoder + Neuron)
-│   │   ├── synaptic_ram.sv    # Synaptic weight memory (parameterized)
-│   │   └── xor_shift_rng.sv   # 32-bit XOR-shift RNG for Poisson encoding
+│   │   ├── lif_neuron.sv    # Leaky Integrate-and-Fire neuron (fixed-point)
+│   │   ├── snn_core.sv      # Top-level SNN core (FSM + Encoder + Neuron)
+│   │   ├── synaptic_ram.sv  # Synaptic weight memory (parameterized)
+│   │   └── xor_shift_rng.sv # 32-bit XOR-shift RNG for Poisson encoding
 │   ├── testbench/
-│   │   └── tb_snn.sv          # Simulation testbench
+│   │   └── tb_snn.sv        # Simulation testbench
 │   └── weights/
 │       ├── data.csv
 │       └── weights_int8.csv
-├── lifneuron.ipynb            # Python prototyping of neuron dynamics
-├── README.md                  # This documentation
-└── snn_analysis.ipynb         # Accuracy analysis and validation graphs
+├── lifneuron.ipynb          # Python prototyping of neuron dynamics
+├── README.md                # This documentation
+└── snn_analysis.ipynb       # Accuracy analysis and validation graphs
 ```
 
 ## Architecture & Modules
@@ -82,6 +100,7 @@ Architecture: Contains the accumulator, weight registers, and a specialized ALU 
 
 5. **poisson_encoder.sv** (Spike Generator)
 Function: Converts the 8-bit input pixel intensity into a stochastic bit-stream (spike train) proportional to the pixel's brightness, enabling the SNN to process static image data.
+
 ### RTL - 2
 [View Simulation on EDA Playground](https://www.edaplayground.com/x/J3Pa)
 #### High-Level Data Flow
