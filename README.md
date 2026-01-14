@@ -32,20 +32,29 @@ This work serves as a foundational building block for Embedded AI, Event-driven 
 
 ```text
 .
-├── rtl/
-│ ├── lif_neuron.sv # Leaky Integrate-and-Fire neuron (fixed-point)
-│ ├── snn_core.sv # Top-level SNN core (FSM + Encoder + Neuron)
-│ ├── synaptic_ram.sv # Synaptic weight memory (parameterized)
-│ └── xor_shift_rng.sv # 32-bit XOR-shift RNG for Poisson encoding
-│
-├── testbench/
-│ └── tb_snn.sv # Simulation testbench and waveform generation
-│
-└── README.md # This documentation
+├── Notes/
+├── rtl-1/
+├── rtl-2/
+│   ├── design/
+│   │   ├── lif_neuron.sv      # Leaky Integrate-and-Fire neuron (fixed-point)
+│   │   ├── snn_core.sv        # Top-level SNN core (FSM + Encoder + Neuron)
+│   │   ├── synaptic_ram.sv    # Synaptic weight memory (parameterized)
+│   │   └── xor_shift_rng.sv   # 32-bit XOR-shift RNG for Poisson encoding
+│   ├── testbench/
+│   │   └── tb_snn.sv          # Simulation testbench
+│   └── weights/
+│       ├── data.csv
+│       └── weights_int8.csv
+├── lifneuron.ipynb
+├── README.md                  # This documentation
+└── SNNExploration.ipynb
 ```
 
 ## Architecture & Modules
+# RTL - 1
 
+# RTL - 2
+[Link text]https://www.edaplayground.com/x/J3Pa
 ### High-Level Data Flow
 The hardware implements a single-neuron inference pipeline with explicit temporal dynamics.
 **Pipeline:** Input Value → Poisson Encoder → Synaptic Weight Memory → Temporal Accumulator → LIF Neuron → Output Spike
