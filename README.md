@@ -45,16 +45,16 @@ This work serves as a foundational building block for Embedded AI, Event-driven 
 │   └── weights/
 │       ├── data.csv
 │       └── weights_int8.csv
-├── lifneuron.ipynb
+├── lifneuron.ipynb            # Python prototyping of neuron dynamics
 ├── README.md                  # This documentation
-└── SNNExploration.ipynb
+└── snn_analysis.ipynb         # Accuracy analysis and validation graphs
 ```
 
 ## Architecture & Modules
-# RTL - 1
+### RTL - 1
 
-# RTL - 2
-[Link text]https://www.edaplayground.com/x/J3Pa
+### RTL - 2
+[View Simulation on EDA Playground](https://www.edaplayground.com/x/J3Pa)
 ### High-Level Data Flow
 The hardware implements a single-neuron inference pipeline with explicit temporal dynamics.
 **Pipeline:** Input Value → Poisson Encoder → Synaptic Weight Memory → Temporal Accumulator → LIF Neuron → Output Spike
