@@ -12,7 +12,7 @@ module lif_neuron #(
     
     wire signed [16:0] calc_potential;
     
-   
+
     assign calc_potential = {potential[15], potential} 
                           - {potential[15], (potential >>> LEAK_SHIFT)} 
                           + {input_sum[15], input_sum};
@@ -24,16 +24,16 @@ module lif_neuron #(
         end else if (update_enable) begin
             if (calc_potential >= $signed({1'b0, THRESHOLD})) begin
                 fire <= 1;
-                potential <= 0;      // Reset
+                potential <= 0;      // Reset after fire
             end else if (calc_potential < 0) begin
                 fire <= 0;
-                potential <= 0;     
+                potential <= 0;      
             end else begin
                 fire <= 0;
                 potential <= calc_potential[15:0];
             end
         end else begin
-            fire <= 0;
+            fire <= 0; // Fire signal only high for 1 tick
         end
     end
 endmodule
