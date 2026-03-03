@@ -59,6 +59,10 @@ This work serves as a foundational building block for **Embedded AI**, **Event-d
 └── README.md
 ```
 
+
+https://github.com/user-attachments/assets/fd29895d-989b-4058-b902-d023ffc08167
+
+
 ---
 ## Architecture & Modules
 
